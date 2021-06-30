@@ -4,10 +4,8 @@
  * Updates response item in the Google Form with available session time slots
  */
 function updateSlots() {
-  var prefilledUrl = "https://docs.google.com/forms/d/e/1FAIpQLScvXb98QdeBSl-QgatWKRaZj_MW267K4KgcQqNxJmETqtng1g/viewform?usp=pp_url&entry.1518930834=Jim+Gianoglio&entry.2120066464=@jgianoglio&entry.507105526=Test+Title&entry.1584054690=Test+description"
-
-  const spreadsheetId = '1DYrv4z8MI00NVuPhJ4jzrjkY2K5EeBhdWYdpny8c1eY'; // Google Sheet ID that hosts data for session board
-  const sheetName = 'Nordics'; // Sessions sheet name
+  const spreadsheetId = '1xEd2daCtBSeItYTe3q1-YILtG9fB-MOTOku3Ggm8uIs'; // Google Sheet ID that hosts data for session board
+  const sheetName = 'Europe'; // Sessions sheet name
 
   const sessionsItemId = 1515269446; // ID of the form field with session slots. May change in case the form fields are added manually.
 
@@ -73,7 +71,7 @@ function updateSlots() {
     let responseParsed = formResponse.getResponseForItem(sessionsItem).getResponse().split(slotNameSeparator);
     var timeSubmitted = responseParsed[0];
     var roomSubmitted = responseParsed[1];
-    
+
     console.log('session submitted: ', [timeSubmitted, roomSubmitted]);
   }
 
@@ -171,4 +169,9 @@ function slotReset(columnsInfo, cell, row){
       cell.offset(row, columnsInfo[key].column).setValue('');
     }
   });
+}
+
+function enableAcceptResponses(){
+  let form = FormApp.getActiveForm();
+  form.setAcceptingResponses(true);
 }
